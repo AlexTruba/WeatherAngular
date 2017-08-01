@@ -1,0 +1,35 @@
+<section class="body-content">
+<div class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Виберіть місто</h3>
+                <ul class="city-list">
+                        <li>
+                            <a href="" [routerLink]="['/detail', 'Київ']">Київ </a>
+                        </li>
+                        <li>
+                            <a href="" [routerLink]="['/detail', 'Львів']"> Львів </a>
+                        </li>
+                        <li>
+                            <a href="" [routerLink]="['/detail', 'Харьків']">Харьків</a>
+                        </li>
+                        <li>
+                            <a href="" [routerLink]="['/detail', 'Дніпропетровськ']">Дніпропетровськ</a>
+                        </li>
+                        <li>
+                            <a href="" [routerLink]="['/detail', 'Одеса']">Одеса</a>
+                        </li>                        
+                </ul>
+                <h3>або скористайтесь пошуком</h3>
+                <form #form="ngForm" id = "weather-form">
+                    <input type="text" [(ngModel)]="cityName" placeholder="Введіть назву міста" name="cityName" required>
+                    <div class="hover-effect">
+                        <input (click)="onClick()"  [disabled]="!form.form.valid" type="submit" value="Знайти">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</section>

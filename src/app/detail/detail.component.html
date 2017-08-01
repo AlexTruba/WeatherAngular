@@ -1,0 +1,87 @@
+<section class="body-content">
+<div class="wrapper">
+    <div class="container no-pad">
+        <div class="row">
+            <div class="col-md-12" >
+                <div *ngIf="weatherInfo!= null">
+                        <h2>Погода у місті {{cityName}}</h2>
+                        <div class="all-days">
+                                <div class="daily-weather" *ngFor="let item of weatherInfo.list; let i = index" [hidden]="i!=activeDay">
+                                    <div class="col-md-6">
+                                        <div class="info-block">
+                                            <h4>Місцевий прогноз погоди</h4>
+                                            <div class="col-md-12"><div class="text-main datetime">{{ item.dt*1000 |  date:'EEEE' | localDay}} {{ item.dt*1000 |  date:'dd/MM/y'}}</div></div>
+                                            <div class="col-md-6 align-center wrap-image">
+                                                <img src="/assets/{{item.weather[0].icon}}.svg" alt="Alternate Text" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="text-main">{{item.weather[0].main | weatherState}}</div>
+                                                <div class="temp-block">
+                                                    <div class="temp">{{item.temp.day | roundNumber}} °C</div>
+                                                    <div class="temp">{{(item.temp.day * 9 / 5) + 32 | roundNumber}}  °F</div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="info-block">
+                                            <h4>Детальніше</h4>
+                                            <table>
+                                                <tr>
+                                                    <td>Тиск</td>
+                                                    <td>{{ item.pressure | roundNumber}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Вологість</td>
+                                                    <td>{{item.humidity | roundNumber}} %</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Швидкість вітру</td>
+                                                    <td>{{item.speed }} м/с</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Хмарність</td>
+                                                    <td>{{item.clouds | roundNumber}} %</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="week">
+                            <div class="col-md-2 day-js" *ngFor="let item of weatherInfo.list; let i = index" [hidden]="i==activeDay" (click)="changeActiveDay(i)">
+                                <div class="daily-report info-block">
+                                    <h4>{{ item.dt*1000 |  date:'EEEE' | localDay}} </h4>
+                                    <div class="col-md-12">
+                                        <div class="date">
+                                           {{ item.dt*1000 |  date:'dd/MM/y'}}</div>
+                                    </div>
+                                    <div class="col-md-12 align-center wrap-image">
+                                        <img src="/assets/{{item.weather[0].icon}}.svg" alt="Alternate Text" />
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="temp">{{item.temp.day | roundNumber}} °C</div>
+                                        <div class="temp">{{(item.temp.day * 9 / 5) + 32 | roundNumber}}  °F</div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    </div>
+                            </div>
+                        </div>
+                 </div>
+                 <div *ngIf=" (weatherInfo === null) && (isError == false)">
+                    <h2>Данне місто не знайдено!<br> Спробуйте знайти інше місто</h2>
+                </div>
+                 <div *ngIf=" isError === true">
+                    <h2>Виникла помилка при зверненні до серверу</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="align-center back">
+        <a href="/" class = "hover-effect">Повернутися на головну</a>
+    </div>
+</div>
+</section>

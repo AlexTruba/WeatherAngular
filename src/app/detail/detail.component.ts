@@ -13,10 +13,10 @@ import { DatePipe } from '@angular/common';
 })
 export class DetailComponent implements OnInit {
 
-  private cityName:string;
-  private weatherInfo:any = undefined;
-  private activeDay:number = 0;
-  private isError:boolean = false;
+  public cityName:string;
+  public weatherInfo:any = undefined;
+  public activeDay:number = 0;
+  public isError:boolean = false;
 
   constructor(private router:ActivatedRoute, private weather:WeatherService) { 
     this.router
